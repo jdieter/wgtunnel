@@ -180,6 +180,11 @@ constructor(
         if (_uiState.value.interfaceProxy.dnsServers.isNotEmpty()) {
             builder.parseDnsServers(_uiState.value.interfaceProxy.dnsServers.trim())
         }
+        if (_uiState.value.interfaceProxy.searchDomains.isNotEmpty()) {
+            com.wireguard.config.Attribute.split(_uiState.value.interfaceProxy.searchDomains.trim()).forEach { domain ->
+                builder.addDnsSearchDomain(domain)
+            }
+        }
         if (_uiState.value.interfaceProxy.mtu.isNotEmpty())
             builder.parseMtu(_uiState.value.interfaceProxy.mtu.trim())
         if (_uiState.value.interfaceProxy.listenPort.isNotEmpty()) {
@@ -188,6 +193,7 @@ constructor(
         if (isAllApplicationsEnabled()) emptyCheckedPackagesList()
         if (_uiState.value.include) builder.includeApplications(_uiState.value.checkedPackageNames)
         if (!_uiState.value.include) builder.excludeApplications(_uiState.value.checkedPackageNames)
+
         return builder.build()
     }
 
@@ -197,6 +203,11 @@ constructor(
         builder.parseAddresses(_uiState.value.interfaceProxy.addresses.trim())
         if (_uiState.value.interfaceProxy.dnsServers.isNotEmpty()) {
             builder.parseDnsServers(_uiState.value.interfaceProxy.dnsServers.trim())
+        }
+        if (_uiState.value.interfaceProxy.searchDomains.isNotEmpty()) {
+            com.wireguard.config.Attribute.split(_uiState.value.interfaceProxy.searchDomains.trim()).forEach { domain ->
+                builder.addDnsSearchDomain(domain)
+            }
         }
         if (_uiState.value.interfaceProxy.mtu.isNotEmpty())
             builder.parseMtu(_uiState.value.interfaceProxy.mtu.trim())
@@ -380,6 +391,14 @@ constructor(
         _uiState.update {
             it.copy(
                 interfaceProxy = _uiState.value.interfaceProxy.copy(dnsServers = value),
+            )
+        }
+    }
+
+    fun onSearchDomainsChanged(value: String) {
+        _uiState.update {
+            it.copy(
+                interfaceProxy = _uiState.value.interfaceProxy.copy(searchDomains = value),
             )
         }
     }

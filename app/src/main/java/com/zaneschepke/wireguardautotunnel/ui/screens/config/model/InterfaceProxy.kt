@@ -7,6 +7,7 @@ data class InterfaceProxy(
     val publicKey: String = "",
     val addresses: String = "",
     val dnsServers: String = "",
+    val searchDomains: String = "",
     val listenPort: String = "",
     val mtu: String = "",
     val junkPacketCount: String = "",
@@ -26,6 +27,7 @@ data class InterfaceProxy(
                 privateKey = i.keyPair.privateKey.toBase64().trim(),
                 addresses = i.addresses.joinToString(", ").trim(),
                 dnsServers = i.dnsServers.joinToString(", ").replace("/", "").trim(),
+                searchDomains = i.dnsSearchDomains.joinToString(", ").trim(),
                 listenPort =
                 if (i.listenPort.isPresent) {
                     i.listenPort.get().toString().trim()
@@ -41,6 +43,7 @@ data class InterfaceProxy(
                 privateKey = i.keyPair.privateKey.toBase64().trim(),
                 addresses = i.addresses.joinToString(", ").trim(),
                 dnsServers = i.dnsServers.joinToString(", ").replace("/", "").trim(),
+                searchDomains = i.dnsSearchDomains.joinToString(", ").trim(),
                 listenPort =
                 if (i.listenPort.isPresent) {
                     i.listenPort.get().toString().trim()

@@ -48,6 +48,7 @@
     <string name="public_key">Public key</string>
     <string name="addresses">Addresses</string>
     <string name="dns_servers">DNS servers</string>
+    <string name="search_domains">Search domains</string>
     <string name="mtu">MTU</string>
     <string name="peer">Peer</string>
     <string name="allowed_ips">Allowed IPs</string>
